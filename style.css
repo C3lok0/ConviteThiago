@@ -267,12 +267,6 @@ h1 {
   text-transform: uppercase;
 }
 
-.timeline-copy {
-  margin: 0 0 18px;
-  font-size: 0.95rem;
-  line-height: 1.45;
-}
-
 .timeline-status {
   min-height: 1.4em;
   margin: 0 0 12px;
@@ -406,8 +400,7 @@ h1 {
 }
 
 .timeline-button:focus-visible,
-.viewer-button:focus-visible,
-.caption-input:focus-visible {
+.viewer-button:focus-visible {
   outline: 3px solid var(--blue);
   outline-offset: 3px;
 }
@@ -557,44 +550,6 @@ h1 {
   display: none;
 }
 
-.viewer-caption {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  gap: 14px;
-  padding-top: 14px;
-  border-top: 1px solid #ffffff30;
-}
-
-.caption-label {
-  display: block;
-  margin-bottom: 7px;
-  color: #f8d954;
-  font-size: 0.8rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.caption-input {
-  display: block;
-  width: 100%;
-  min-height: 72px;
-  padding: 11px 12px;
-  resize: vertical;
-  border: 2px solid #ffffff70;
-  border-radius: 0;
-  color: white;
-  background: #242424;
-  font:
-    700 1rem/1.4 "Nunito",
-    sans-serif;
-}
-
-.caption-input::placeholder {
-  color: #c8c8c8;
-}
-
 .viewer-empty {
   display: none;
   min-height: 50vh;
@@ -617,8 +572,7 @@ h1 {
   text-transform: uppercase;
 }
 
-.gallery-dialog.empty .viewer-stage,
-.gallery-dialog.empty .viewer-caption {
+.gallery-dialog.empty .viewer-stage {
   display: none;
 }
 
@@ -646,10 +600,6 @@ h1 {
   .viewer-button {
     min-width: 40px;
     min-height: 44px;
-  }
-  .viewer-caption {
-    grid-template-columns: 1fr;
-    align-items: stretch;
   }
   .viewer-add {
     justify-self: start;

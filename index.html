@@ -61,8 +61,6 @@
 
     <section class="timeline" aria-labelledby="timeline-title">
         <h2 class="timeline-heading" id="timeline-title">Nossa linha do tempo</h2>
-        <p class="timeline-copy">Relembre os momentos mais incríveis do primeiro ano do Thiago, uma foto de cada vez.
-        </p>
         <p class="timeline-status" id="timeline-status" aria-live="polite">Nenhuma foto adicionada ainda.</p>
         <button class="timeline-button" id="open-gallery" type="button">Rever linha do tempo</button>
         <button class="timeline-preview" id="timeline-preview" type="button" aria-label="Abrir linha do tempo">
@@ -90,6 +88,7 @@
                     <h2 class="viewer-title" id="viewer-title">Memórias do nosso herói</h2>
                     <p class="viewer-count" id="viewer-count" aria-live="polite"></p>
                 </div>
+                <button class="timeline-button" id="enable-video-sound" type="button" hidden>Ativar som</button>
                 <button class="viewer-button" id="close-gallery" type="button"
                     aria-label="Fechar galeria">&times;</button>
             </header>
@@ -106,14 +105,6 @@
                         aria-label="Vídeo da linha do tempo"></video>
                 </figure>
                 <button class="viewer-button" id="next-photo" type="button" aria-label="Próxima foto">&rarr;</button>
-            </div>
-            <div class="viewer-caption" id="viewer-caption">
-                <label>
-                    <span class="caption-label">Descrição deste momento</span>
-                    <textarea class="caption-input" id="photo-description"
-                        placeholder="Escreva uma legenda para esta foto..."></textarea>
-                </label>
-                <button class="timeline-button" id="enable-video-sound" type="button" hidden>Ativar som</button>
             </div>
         </div>
     </dialog>
@@ -209,7 +200,6 @@
         const viewerImage = document.getElementById("viewer-image");
         const viewerVideo = document.getElementById("viewer-video");
         const enableSoundButton = document.getElementById("enable-video-sound");
-        const descriptionInput = document.getElementById("photo-description");
         const viewerCount = document.getElementById("viewer-count");
         const previousButton = document.getElementById("previous-photo");
         const nextButton = document.getElementById("next-photo");
@@ -253,13 +243,12 @@
                 viewerImage.hidden = false;
                 enableSoundButton.hidden = true;
                 previewImage.removeAttribute("src");
-                descriptionInput.value = "";
                 return;
             }
 
             const photo = photos[currentPhotoIndex];
             const isVideo = photo.type === "video";
-            const description = photo.description || photo.name || `Momento ${currentPhotoIndex + 1}`;
+            const description = photo.name || `Momento ${currentPhotoIndex + 1}`;
             viewerVideo.pause();
             viewerImage.hidden = isVideo;
             viewerVideo.hidden = !isVideo;
@@ -276,7 +265,6 @@
                 viewerImage.alt = description;
             }
 
-            descriptionInput.value = photo.description || "";
             viewerCount.textContent = `Momento ${currentPhotoIndex + 1} de ${photos.length}`;
             timelineStatus.textContent = `${photos.length} ${photos.length === 1 ? "momento registrado" : "momentos registrados"}.`;
             previousButton.disabled = photos.length < 2;
@@ -336,19 +324,12 @@
                 viewerVideo.muted = true;
             });
         });
-        descriptionInput.addEventListener("input", () => {
-            if (!photos.length) return;
-            photos[currentPhotoIndex].description = descriptionInput.value;
-            viewerImage.alt = descriptionInput.value || photos[currentPhotoIndex].name;
-            previewImage.alt = viewerImage.alt;
-        });
-
         galleryDialog.addEventListener("click", (event) => {
             if (event.target === galleryDialog) galleryDialog.close();
         });
 
         document.addEventListener("keydown", (event) => {
-            if (!galleryDialog.open || event.target === descriptionInput) return;
+            if (!galleryDialog.open) return;
             if (event.key === "ArrowLeft") movePhoto(-1);
             if (event.key === "ArrowRight") movePhoto(1);
         });
