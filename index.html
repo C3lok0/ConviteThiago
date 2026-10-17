@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#e82328">
+    <title>Missão 1 ano | Thiago</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Nunito:wght@600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <main class="invitation" aria-labelledby="invite-title">
+        <header class="top-band">
+            <p class="eyebrow">Atenção, equipe de heróis!</p>
+            <h1 id="invite-title">Missão<br>aniversário</h1>
+            <div class="hero-mark" aria-hidden="true">T</div>
+        </header>
+
+        <section class="body-content" aria-label="Detalhes do convite">
+            <p class="mission-label">Convocação especial</p>
+            <p class="intro">O herói <strong>Thiago</strong> está completando seu primeiro aninho, venha participar
+                dessa aventura!</p>
+
+            <div class="age-wrap" aria-label="1 ano">
+                <span class="age-number">1</span>
+                <span class="age-copy">ano de<br>incríveis aventuras</span>
+            </div>
+
+            <p class="intro">Vista seu melhor sorriso e venha comemorar com a nossa família de super-heróis.</p>
+
+            <div class="details">
+                <div class="detail">
+                    <span class="detail-label">Data</span>
+                    <p class="detail-value">29 de Novembro</p>
+                </div>
+                <div class="detail">
+                    <span class="detail-label">Horário</span>
+                    <p class="detail-value">14:00</p>
+                </div>
+                <div class="detail location">
+                    <span class="detail-label">Local</span>
+                    <p class="detail-value"> <span class="locationLink">Avenida Sigismundo Nunes de Oliveira 730</span> </p>
+                </div>
+            </div>
+
+            <p class="callout">Confirme sua presença até <strong>08 de Novembro</strong><br> usando o link
+                <!-- <a href="https://forms.gle/g4WN6CEZCh71cLtD7">[link para confirmar presença]</a></p>
+        </section> --><span class="btn-whatsapp" data-numero="5514998585338"
+                    data-mensagem="🍰Olá!Meu nome é [seu nome]e meu CPF [seu CPF],confirmo minha presença na festa do Thiago.">[link
+                    para confirmar
+                    presença]</span>
+            </p>
+
+            <footer class="bottom-band">Os Incríveis • Uma festa superespecial</footer>
+    </main>
+
+    <section class="timeline" aria-labelledby="timeline-title">
+        <h2 class="timeline-heading" id="timeline-title">Nossa linha do tempo</h2>
+        <p class="timeline-copy">Relembre os momentos mais incríveis do primeiro ano do Thiago, uma foto de cada vez.
+        </p>
+        <p class="timeline-status" id="timeline-status" aria-live="polite">Nenhuma foto adicionada ainda.</p>
+        <button class="timeline-button" id="open-gallery" type="button">Rever linha do tempo</button>
+        <button class="timeline-preview" id="timeline-preview" type="button" aria-label="Abrir linha do tempo">
+            <img id="preview-image" alt="Prévia do momento selecionado">
+        </button>
+    </section>
+
+    <dialog class="opening-dialog" id="opening-dialog" aria-labelledby="opening-title">
+        <div class="opening-content">
+            <p class="opening-kicker">Uma missão muito especial</p>
+            <h2 class="opening-title" id="opening-title">Um ano de incríveis aventuras</h2>
+            <p class="opening-copy">Cada sorriso e descoberta marcou uma parte dessa história. Antes de rever esses
+                momentos, você pode conhecer o convite.</p>
+            <button class="opening-button" id="view-invitation-first" type="button">Ver convite primeiro</button>
+            <p class="opening-countdown" aria-live="polite">A linha do tempo começa em <strong
+                    id="opening-seconds">15</strong> segundos</p>
+            <div class="opening-progress" aria-hidden="true"><span></span></div>
+        </div>
+    </dialog>
+
+    <dialog class="gallery-dialog" id="gallery-dialog" aria-labelledby="viewer-title">
+        <div class="viewer-shell">
+            <header class="viewer-header">
+                <div>
+                    <h2 class="viewer-title" id="viewer-title">Memórias do nosso herói</h2>
+                    <p class="viewer-count" id="viewer-count" aria-live="polite"></p>
+                </div>
+                <button class="viewer-button" id="close-gallery" type="button"
+                    aria-label="Fechar galeria">&times;</button>
+            </header>
+            <div class="viewer-empty" id="viewer-empty">
+                <p>As memórias dessa aventura chegam em breve.</p>
+                <button class="timeline-button" id="empty-close-gallery" type="button">Ir para o convite</button>
+            </div>
+            <div class="viewer-stage" id="viewer-stage">
+                <button class="viewer-button" id="previous-photo" type="button"
+                    aria-label="Foto anterior">&larr;</button>
+                <figure class="viewer-figure">
+                    <img class="viewer-image" id="viewer-image" alt="">
+                    <video class="viewer-video" id="viewer-video" controls playsinline muted autoplay hidden
+                        aria-label="Vídeo da linha do tempo"></video>
+                </figure>
+                <button class="viewer-button" id="next-photo" type="button" aria-label="Próxima foto">&rarr;</button>
+            </div>
+            <div class="viewer-caption" id="viewer-caption">
+                <label>
+                    <span class="caption-label">Descrição deste momento</span>
+                    <textarea class="caption-input" id="photo-description"
+                        placeholder="Escreva uma legenda para esta foto..."></textarea>
+                </label>
+                <button class="timeline-button" id="enable-video-sound" type="button" hidden>Ativar som</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script>
+        const galleryDialog = document.getElementById("gallery-dialog");
+        const openingDialog = document.getElementById("opening-dialog");
+        const photos = [
+            // { src: "images/01-primeiro-sorriso.jpg", name: "Primeiro sorriso", description: "..." },
+            { src: "fotos/AntesDaConfirmacao1.jpeg", name: "Antes da Confirmação", description: "..." },
+            { src: "fotos/AntesDaConfirmacao2.jpeg", name: "Antes da Confirmação", description: "..." },
+            { type: "video", src: "Fotos/Ultrassom.mp4", poster: "fotos/AntesDaConfirmacao2.jpeg", name: "Ultrassom", description: "" },
+            { src: "fotos/Cha1.jpeg", name: "cha revelacao", description: "..." },
+            { src: "fotos/Cha2.jpeg", name: "cha revelacao", description: "..." },
+            { src: "fotos/Cha3.jpeg", name: "cha revelacao", description: "..." },
+            { src: "fotos/Cha4.jpeg", name: "cha revelacao", description: "..." },
+            { src: "fotos/Cha5.jpeg", name: "cha revelacao", description: "..." },
+            { type: "video", src: "Fotos/Revelacao.mp4", poster: "fotos/primeiro-passo.jpg", name: "Ultrassom", description: "" },
+            { src: "fotos/trabalho.jpeg", name: "festinha trabalho da adriana", description: "..." },
+            { src: "fotos/trabalho2.jpeg", name: "festinha trabalho da adriana", description: "..." },
+            { src: "fotos/ChaIgreja.jpeg", name: "cha na igreja", description: "..." },
+            { src: "fotos/ChaIgreja2.jpeg", name: "cha na igreja", description: "..." },
+            { src: "fotos/ChaIgreja3.jpeg", name: "cha na igreja", description: "..." },
+            { src: "fotos/ChaIgreja4.jpeg", name: "cha na igreja", description: "..." },
+            { src: "fotos/ChaIgreja5.jpeg", name: "cha na igreja", description: "..." },
+            { src: "fotos/ChaIgreja6.jpeg", name: "cha na igreja", description: "..." },
+            { src: "fotos/poscha.jpeg", name: "pos cha revelacao", description: "..." },
+            { src: "fotos/poscha2.jpeg", name: "pos cha revelacao", description: "..." },
+            { src: "fotos/nascimento1.jpeg", name: "Nascimento", description: "..." },
+            { src: "fotos/nascimento2.jpeg", name: "Nascimento", description: "..." },
+            { src: "fotos/nascimento3.jpeg", name: "Nascimento", description: "..." },
+            { src: "fotos/nascimento4.jpeg", name: "Nascimento", description: "..." },
+            { src: "fotos/EmCasa.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasaRindo.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasa3.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/banho1.jpeg", name: "tomando banho", description: "..." },
+            { src: "fotos/banho2.jpeg", name: "tomando banho", description: "..." },
+            { src: "fotos/EmCasa4.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasa5.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasa6.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasa7.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasa8.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/EmCasa9.jpeg", name: "Em Casa", description: "..." },
+            { src: "fotos/macacao.jpeg", name: "Roupinha macacao", description: "..." },
+            { src: "fotos/Cadeirinha.jpeg", name: "Dormindo na cadeirinha", description: "..." },
+            { src: "fotos/DormindoSergio.jpeg", name: "Dormindo com Sergio", description: "..." },
+            { src: "fotos/DormindoSergio2.jpeg", name: "Dormindo com Sergio", description: "..." },
+            { src: "fotos/MamaAdelia.jpeg", name: "vovo Adélia", description: "..." },
+            { src: "fotos/FotoCesar.jpeg", name: "Foto de Cesar", description: "..." },
+            { src: "fotos/FotoBarbara.jpeg", name: "Foto de Barbara", description: "..." },
+            { src: "fotos/FotoCida.jpeg", name: "Foto de Cida", description: "..." },
+            { src: "fotos/laika.jpeg", name: "laika", description: "..." },
+            { src: "fotos/FotoAdriana.jpeg", name: "foto da adriana", description: "..." },
+            { src: "fotos/FotoGabriel.jpeg", name: "foto de Gabriel", description: "..." },
+            { src: "fotos/NiverAdelia.jpeg", name: "Aniversário de Adélia", description: "..." },
+            { src: "fotos/FotoCarol.jpeg", name: "Foto de Carol", description: "..." },
+            { src: "fotos/FotoSolo.jpeg", name: "Foto Solitária", description: "..." },
+            { src: "fotos/SelfieSergio.jpeg", name: "Selfie com Sergio", description: "..." },
+            { src: "fotos/SelfieSergio2.jpeg", name: "Selfie com Sergio", description: "..." },
+            { src: "fotos/FotoSarah.jpeg", name: "Foto de Sarah", description: "..." },
+            { src: "fotos/FotoSolo2.jpeg", name: "Foto Thiago", description: "..." },
+            { src: "fotos/FotoSolo3.jpeg", name: "Foto Thiago", description: "..." },
+            { src: "fotos/FotoSolo4.jpeg", name: "Foto Thiago", description: "..." },
+            { src: "fotos/FotoSolo5.jpeg", name: "Foto Thiago", description: "..." },
+            { src: "fotos/FotoSolo6.jpeg", name: "Foto Thiago", description: "..." },
+            { src: "fotos/Copa1.jpeg", name: "Copa do Mundo", description: "..." },
+            { src: "fotos/Copa2.jpeg", name: "Copa do Mundo", description: "..." },
+            { src: "fotos/Copa3.jpeg", name: "Copa do Mundo", description: "..." },
+            { src: "fotos/Copa4.jpeg", name: "Copa do Mundo", description: "..." },
+            { src: "fotos/Copa5.jpeg", name: "Copa do Mundo", description: "..." },
+            { src: "fotos/Copa6.jpeg", name: "Copa do Mundo", description: "..." },
+            { src: "fotos/SelfieSergio3.jpeg", name: "Selfie com Sergio", description: "..." },
+            { src: "fotos/SelfieSergio4.jpeg", name: "Selfie com Sergio", description: "..." },
+            { src: "fotos/FotoCarol2.jpeg", name: "Foto de Carol", description: "..." },
+            { src: "fotos/FotoCarol3.jpeg", name: "Foto de Carol", description: "..." },
+            { src: "fotos/FotoCarol4.jpeg", name: "Foto de Carol", description: "..." },
+            { src: "fotos/FotoCarol5.jpeg", name: "Foto de Carol", description: "..." },
+            { src: "fotos/FotoAdelia2.jpeg", name: "Foto de Adelia", description: "..." },
+            { src: "fotos/Miranha.jpeg", name: "Foto fantasiado de homem aranha", description: "..." },
+            { src: "fotos/Miranha2.jpeg", name: "Foto fantasiado de homem aranha", description: "..." },
+            { src: "fotos/MiranhaEquipe.jpeg", name: "Foto da equipe do homem aranha", description: "..." },
+            { src: "fotos/MiranhaEquipe2.jpeg", name: "Foto da equipe do homem aranha", description: "..." },
+            { src: "fotos/MiranhaEquipe3.jpeg", name: "Foto da equipe do homem aranha", description: "..." },
+            { src: "fotos/Lili.jpeg", name: "Lili", description: "..." },
+            { src: "fotos/DiaDosPais.jpeg", name: "Dia dos Pais", description: "..." },
+            { src: "fotos/FormaturaCarol.jpeg", name: "Formatura de Carol", description: "..." },
+            { src: "fotos/FormaturaCarol2.jpeg", name: "Formatura de Carol", description: "..." },
+            { src: "fotos/FormaturaCarol3.jpeg", name: "Formatura de Carol", description: "..." },
+            { type: "video", src: "Fotos/Finalizacao.mp4", poster: "fotos/DiaDosPais.jpeg", name: "dia das criancas", description: "" },
+        ];
+        let currentPhotoIndex = 0;
+
+        const viewerImage = document.getElementById("viewer-image");
+        const viewerVideo = document.getElementById("viewer-video");
+        const enableSoundButton = document.getElementById("enable-video-sound");
+        const descriptionInput = document.getElementById("photo-description");
+        const viewerCount = document.getElementById("viewer-count");
+        const previousButton = document.getElementById("previous-photo");
+        const nextButton = document.getElementById("next-photo");
+        const timelineStatus = document.getElementById("timeline-status");
+        const preview = document.getElementById("timeline-preview");
+        const previewImage = document.getElementById("preview-image");
+        const openingSeconds = document.getElementById("opening-seconds");
+        let openingSecondsRemaining = 15;
+        let openingTimer;
+
+        function playCurrentVideo() {
+            if (photos[currentPhotoIndex]?.type !== "video" || !galleryDialog.open) return;
+
+            viewerVideo.muted = false;
+            const playback = viewerVideo.play();
+            if (!playback) return;
+
+            playback.then(() => {
+                enableSoundButton.hidden = true;
+            }).catch(() => {
+                viewerVideo.muted = true;
+                enableSoundButton.hidden = false;
+                viewerVideo.play().catch(() => { });
+            });
+        }
+
+        function renderPhoto() {
+            const hasPhotos = photos.length > 0;
+            galleryDialog.classList.toggle("empty", !hasPhotos);
+            document.getElementById("viewer-empty").classList.toggle("visible", !hasPhotos);
+            preview.classList.toggle("visible", hasPhotos);
+
+            if (!hasPhotos) {
+                timelineStatus.textContent = "As memórias dessa aventura chegam em breve.";
+                viewerCount.textContent = "";
+                viewerImage.removeAttribute("src");
+                viewerVideo.pause();
+                viewerVideo.removeAttribute("src");
+                viewerVideo.load();
+                viewerVideo.hidden = true;
+                viewerImage.hidden = false;
+                enableSoundButton.hidden = true;
+                previewImage.removeAttribute("src");
+                descriptionInput.value = "";
+                return;
+            }
+
+            const photo = photos[currentPhotoIndex];
+            const isVideo = photo.type === "video";
+            const description = photo.description || photo.name || `Momento ${currentPhotoIndex + 1}`;
+            viewerVideo.pause();
+            viewerImage.hidden = isVideo;
+            viewerVideo.hidden = !isVideo;
+            enableSoundButton.hidden = !isVideo || !viewerVideo.muted;
+
+            if (isVideo) {
+                viewerVideo.removeAttribute("src");
+                viewerVideo.src = photo.src;
+                viewerVideo.poster = photo.poster || "";
+                viewerVideo.load();
+                viewerVideo.setAttribute("aria-label", description);
+            } else {
+                viewerImage.src = photo.src;
+                viewerImage.alt = description;
+            }
+
+            descriptionInput.value = photo.description || "";
+            viewerCount.textContent = `Momento ${currentPhotoIndex + 1} de ${photos.length}`;
+            timelineStatus.textContent = `${photos.length} ${photos.length === 1 ? "momento registrado" : "momentos registrados"}.`;
+            previousButton.disabled = photos.length < 2;
+            nextButton.disabled = photos.length < 2;
+
+            const previewSource = isVideo ? photo.poster : photo.src;
+            preview.classList.toggle("visible", Boolean(previewSource));
+            if (previewSource) {
+                previewImage.src = previewSource;
+                previewImage.alt = description;
+            } else {
+                previewImage.removeAttribute("src");
+            }
+
+            playCurrentVideo();
+        }
+
+        function movePhoto(direction) {
+            if (photos.length < 2) return;
+            currentPhotoIndex = (currentPhotoIndex + direction + photos.length) % photos.length;
+            renderPhoto();
+        }
+
+        function openGallery() {
+            if (!galleryDialog.open) galleryDialog.showModal();
+            playCurrentVideo();
+        }
+
+        function cancelOpeningTimer() {
+            window.clearInterval(openingTimer);
+        }
+
+        function showInvitationFirst() {
+            cancelOpeningTimer();
+            openingDialog.close();
+        }
+
+        function startTimeline() {
+            cancelOpeningTimer();
+            openingDialog.close();
+            openGallery();
+        }
+
+        document.getElementById("open-gallery").addEventListener("click", openGallery);
+        preview.addEventListener("click", openGallery);
+        document.getElementById("view-invitation-first").addEventListener("click", showInvitationFirst);
+        document.getElementById("close-gallery").addEventListener("click", () => galleryDialog.close());
+        document.getElementById("empty-close-gallery").addEventListener("click", () => galleryDialog.close());
+        galleryDialog.addEventListener("close", () => viewerVideo.pause());
+        previousButton.addEventListener("click", () => movePhoto(-1));
+        nextButton.addEventListener("click", () => movePhoto(1));
+        enableSoundButton.addEventListener("click", () => {
+            viewerVideo.muted = false;
+            viewerVideo.play().then(() => {
+                enableSoundButton.hidden = true;
+            }).catch(() => {
+                viewerVideo.muted = true;
+            });
+        });
+        descriptionInput.addEventListener("input", () => {
+            if (!photos.length) return;
+            photos[currentPhotoIndex].description = descriptionInput.value;
+            viewerImage.alt = descriptionInput.value || photos[currentPhotoIndex].name;
+            previewImage.alt = viewerImage.alt;
+        });
+
+        galleryDialog.addEventListener("click", (event) => {
+            if (event.target === galleryDialog) galleryDialog.close();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (!galleryDialog.open || event.target === descriptionInput) return;
+            if (event.key === "ArrowLeft") movePhoto(-1);
+            if (event.key === "ArrowRight") movePhoto(1);
+        });
+
+        renderPhoto();
+        openingDialog.showModal();
+        openingTimer = window.setInterval(() => {
+            openingSecondsRemaining -= 1;
+            openingSeconds.textContent = String(openingSecondsRemaining);
+            if (openingSecondsRemaining <= 0) startTimeline();
+        }, 1000);
+
+        function abrirWhatsApp(numero, mensagem) {
+            var mensagemCodificada = encodeURIComponent(mensagem);
+
+            // Monta o link do wa.me
+            var url = `https://wa.me/${numero}?text=${mensagemCodificada}`;
+
+            window.open(url, '_blank');
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var botoesWp = document.querySelectorAll(".btn-whatsapp");
+
+            botoesWp.forEach(function (botao) {
+                botao.addEventListener("click", function (e) {
+                    e.preventDefault(); 
+
+                    var numero = this.getAttribute("data-numero");
+                    var mensagem = this.getAttribute("data-mensagem");
+
+                    abrirWhatsApp(numero, mensagem);
+                });
+            });
+        });
+
+        function locationLink() {
+            var url = "https://share.google/PWye2C7OB0xtSyQKt";
+            document.querySelectorAll(".locationLink").forEach(function (element) {
+                element.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    window.open(url, "_blank", "noopener,noreferrer");
+                });
+            });
+        }
+
+        locationLink();
+
+    </script>
+</body>
+
+</html>

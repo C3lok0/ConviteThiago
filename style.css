@@ -1,0 +1,711 @@
+:root {
+  color-scheme: light;
+  --red: #e82328;
+  --yellow: #ffd633;
+  --ink: #171717;
+  --paper: #fff9e8;
+  --blue: #1574a8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 32px 18px;
+  display: grid;
+  place-items: center;
+  color: var(--ink);
+  background-color: #202020;
+  background-image: radial-gradient(#ffffff20 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+  font-family: "Nunito", sans-serif;
+}
+
+.invitation {
+  position: relative;
+  isolation: isolate;
+  width: min(100%, 560px);
+  overflow: hidden;
+  background: var(--paper);
+  border: 5px solid var(--ink);
+  box-shadow:
+    12px 12px 0 var(--yellow),
+    18px 18px 0 var(--ink);
+  animation: pop-in 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.top-band {
+  position: relative;
+  min-height: 240px;
+  padding: 34px 28px 25px;
+  overflow: hidden;
+  color: white;
+  background: var(--red);
+  text-align: center;
+}
+
+.top-band::before,
+.top-band::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  width: 300px;
+  height: 300px;
+  background: var(--yellow);
+  clip-path: polygon(
+    50% 0%,
+    60% 35%,
+    98% 20%,
+    70% 48%,
+    100% 70%,
+    63% 65%,
+    50% 100%,
+    38% 66%,
+    0% 80%,
+    30% 50%,
+    0% 25%,
+    40% 36%
+  );
+  opacity: 0.95;
+}
+
+.top-band::before {
+  top: -145px;
+  left: -160px;
+  transform: rotate(-18deg);
+}
+
+.top-band::after {
+  right: -172px;
+  bottom: -180px;
+  transform: rotate(24deg);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1,
+.age-number,
+.mission-label {
+  font-family: "Archivo Black", Impact, sans-serif;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  line-height: 0.92;
+  text-shadow: 3px 3px 0 var(--ink);
+}
+
+.hero-mark {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  margin: 19px auto 0;
+  place-items: center;
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  color: var(--yellow);
+  background: var(--ink);
+  box-shadow: 0 0 0 4px var(--yellow);
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 2.6rem;
+  transform: rotate(-8deg);
+}
+
+.body-content {
+  padding: 28px 34px 34px;
+  text-align: center;
+}
+
+.mission-label {
+  display: inline-block;
+  margin: 0 0 15px;
+  padding: 7px 13px;
+  color: white;
+  background: var(--ink);
+  font-size: 0.85rem;
+  transform: rotate(-2deg);
+}
+
+.intro {
+  max-width: 390px;
+  margin: 0 auto 16px;
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
+.age-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin: 14px 0 22px;
+  color: var(--red);
+}
+
+.age-number {
+  font-size: 5.4rem;
+  line-height: 0.9;
+  text-shadow:
+    3px 3px 0 var(--yellow),
+    5px 5px 0 var(--ink);
+}
+
+.age-copy {
+  max-width: 125px;
+  color: var(--ink);
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.05;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 25px 0 22px;
+  text-align: left;
+}
+
+.detail {
+  min-height: 78px;
+  padding: 13px 14px;
+  border: 2px solid var(--ink);
+  background: white;
+}
+
+.detail.location {
+  grid-column: 1 / -1;
+}
+
+.detail-label {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--blue);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.detail-value {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.detail-value .locationLink {
+  color: red;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.callout {
+  margin: 20px 0 0;
+  padding-top: 17px;
+  border-top: 2px dashed #b8a96e;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+.callout strong {
+  color: var(--red);
+}
+
+.callout span.btn-whatsapp{
+  color: var(--blue);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.bottom-band {
+  padding: 12px 20px;
+  color: white;
+  background: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-align: center;
+  margin-top: 22px;
+  text-transform: uppercase;
+}
+
+.timeline {
+  width: min(100%, 560px);
+  padding: 23px;
+  border: 4px solid var(--ink);
+  background: var(--paper);
+  box-shadow:
+    8px 8px 0 var(--red),
+    13px 13px 0 var(--ink);
+}
+
+.timeline-heading {
+  margin: 0 0 8px;
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 1.45rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.timeline-copy {
+  margin: 0 0 18px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.timeline-status {
+  min-height: 1.4em;
+  margin: 0 0 12px;
+  color: #444;
+  font-size: 0.83rem;
+  font-weight: 800;
+}
+
+.timeline-button {
+  min-height: 46px;
+  padding: 10px 15px;
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  background: var(--yellow);
+  font:
+    900 0.9rem "Nunito",
+    sans-serif;
+  cursor: pointer;
+}
+
+.opening-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  color: white;
+  background-color: #202020;
+  background-image: radial-gradient(#ffffff20 1.2px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+
+.opening-dialog::backdrop {
+  background: #202020;
+}
+
+.opening-content {
+  display: grid;
+  width: min(100%, 760px);
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 32px 24px;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.opening-kicker {
+  margin: 0 0 18px;
+  color: var(--yellow);
+  font-size: 0.85rem;
+  font-weight: 900;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.opening-title {
+  max-width: 720px;
+  margin: 0 0 18px;
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.02;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.opening-copy {
+  max-width: 540px;
+  margin: 0 0 28px;
+  color: #e5e5e5;
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.opening-button {
+  min-height: 52px;
+  max-width: 100%;
+  padding: 12px 20px;
+  border: 3px solid var(--ink);
+  color: var(--ink);
+  background: var(--yellow);
+  font: 900 1rem "Nunito", sans-serif;
+  cursor: pointer;
+}
+
+.opening-button:hover {
+  color: white;
+  background: var(--red);
+}
+
+.opening-button:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 4px;
+}
+
+.opening-countdown {
+  margin: 26px 0 10px;
+  color: #dedede;
+  font-size: 0.9rem;
+}
+
+.opening-countdown strong {
+  color: var(--yellow);
+  font-size: 1.1rem;
+}
+
+.opening-progress {
+  width: min(320px, 100%);
+  height: 5px;
+  overflow: hidden;
+  background: #ffffff35;
+}
+
+.opening-progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: opening-countdown 15s linear forwards;
+}
+
+@keyframes opening-countdown {
+  to { transform: scaleX(1); }
+}
+
+.timeline-button:focus-visible,
+.viewer-button:focus-visible,
+.caption-input:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.timeline-preview {
+  display: none;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 18px 0 0;
+  overflow: hidden;
+  border: 3px solid var(--ink);
+  background: #171717;
+  cursor: pointer;
+}
+
+.timeline-preview.visible {
+  display: block;
+}
+
+.timeline-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-dialog {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: clamp(14px, 2.5vw, 28px);
+  overflow: auto;
+  border: 0;
+  color: white;
+  background: #141414;
+}
+
+.gallery-dialog::backdrop {
+  background: #080808ed;
+}
+
+.viewer-shell {
+  display: flex;
+  height: 100%;
+  min-height: 0;
+  flex-direction: column;
+}
+
+.viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #ffffff30;
+}
+
+.viewer-title {
+  margin: 0;
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  text-transform: uppercase;
+}
+
+.viewer-count {
+  margin: 5px 0 0;
+  color: #f8d954;
+  font-size: 0.85rem;
+  font-weight: 900;
+}
+
+.viewer-button {
+  display: inline-grid;
+  min-width: 46px;
+  min-height: 46px;
+  padding: 8px;
+  place-items: center;
+  border: 2px solid white;
+  color: white;
+  background: #252525;
+  font:
+    900 1.35rem "Nunito",
+    sans-serif;
+  cursor: pointer;
+}
+
+.viewer-button:hover:not(:disabled) {
+  background: var(--red);
+}
+.viewer-button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.viewer-stage {
+  display: grid;
+  min-height: 0;
+  height: clamp(180px, 62dvh, 760px);
+  flex: 0 1 auto;
+  grid-template-columns: 52px minmax(0, 1fr) 52px;
+  align-items: center;
+  gap: clamp(8px, 2vw, 24px);
+  padding: 16px 0;
+}
+
+.viewer-figure {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  place-items: center;
+  background: #080808;
+}
+
+.viewer-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.viewer-video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+  background: #080808;
+  object-fit: contain;
+}
+
+.viewer-image[hidden],
+.viewer-video[hidden] {
+  display: none;
+}
+
+.viewer-caption {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #ffffff30;
+}
+
+.caption-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #f8d954;
+  font-size: 0.8rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.caption-input {
+  display: block;
+  width: 100%;
+  min-height: 72px;
+  padding: 11px 12px;
+  resize: vertical;
+  border: 2px solid #ffffff70;
+  border-radius: 0;
+  color: white;
+  background: #242424;
+  font:
+    700 1rem/1.4 "Nunito",
+    sans-serif;
+}
+
+.caption-input::placeholder {
+  color: #c8c8c8;
+}
+
+.viewer-empty {
+  display: none;
+  min-height: 50vh;
+  flex: 1;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.viewer-empty.visible {
+  display: grid;
+}
+.viewer-empty p {
+  max-width: 430px;
+  margin: 0;
+  font-family: "Archivo Black", Impact, sans-serif;
+  font-size: clamp(1.4rem, 5vw, 2.2rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.gallery-dialog.empty .viewer-stage,
+.gallery-dialog.empty .viewer-caption {
+  display: none;
+}
+
+@media (max-width: 520px) {
+  .timeline {
+    padding: 19px;
+  }
+  .opening-dialog {
+    padding: 0;
+  }
+  .opening-content {
+    padding: 26px 18px;
+  }
+  .opening-title {
+    font-size: 2.5rem;
+  }
+  .opening-copy {
+    font-size: 1rem;
+  }
+  .viewer-stage {
+    height: clamp(160px, 52dvh, 520px);
+    grid-template-columns: 42px minmax(0, 1fr) 42px;
+    gap: 6px;
+  }
+  .viewer-button {
+    min-width: 40px;
+    min-height: 44px;
+  }
+  .viewer-caption {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+  .viewer-add {
+    justify-self: start;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 420px) {
+  body {
+    padding: 20px 14px;
+  }
+
+  .invitation {
+    border-width: 4px;
+    box-shadow:
+      8px 8px 0 var(--yellow),
+      12px 12px 0 var(--ink);
+  }
+
+  .top-band {
+    min-height: 218px;
+    padding: 29px 18px 22px;
+  }
+
+  .body-content {
+    padding: 25px 19px 27px;
+  }
+
+  .details {
+    gap: 8px;
+  }
+
+  .detail {
+    padding: 11px 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+  }
+
+  .opening-progress span {
+    transform: scaleX(1);
+  }
+}
