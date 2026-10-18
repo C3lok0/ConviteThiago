@@ -3,7 +3,7 @@
   --red: #e82328;
   --yellow: #ffd633;
   --ink: #171717;
-  --paper: #fff9e8;
+  --paper: #fff;
   --blue: #1574a8;
 }
 
@@ -39,8 +39,8 @@ body {
 
 .top-band {
   position: relative;
-  min-height: 240px;
-  padding: 34px 28px 25px;
+  min-height: 0;
+  padding: 30px 28px 22px;
   overflow: hidden;
   color: white;
   background: var(--red);
@@ -129,7 +129,7 @@ h1 {
 }
 
 .body-content {
-  padding: 28px 34px 34px;
+  padding: 22px 34px 34px;
   text-align: center;
 }
 
@@ -640,12 +640,12 @@ h1 {
   }
 
   .top-band {
-    min-height: 218px;
-    padding: 29px 18px 22px;
+    min-height: 0;
+    padding: 25px 18px 19px;
   }
 
   .body-content {
-    padding: 25px 19px 27px;
+    padding: 19px 19px 27px;
   }
 
   .details {
